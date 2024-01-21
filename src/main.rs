@@ -6,6 +6,9 @@ use std::i16;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let query: &String = &args[1];
+    let seconds = &args[2];
+    let secs_num = seconds.parse::<i32>().unwrap();
+    let num_samples = secs_num * 44100;
     println!("{}", query);
     let freq = query.parse::<f32>().unwrap();
     let spec = hound::WavSpec {
@@ -15,7 +18,7 @@ fn main() {
         sample_format: hound::SampleFormat::Int,
     };
     let mut writer = hound::WavWriter::create("sine.wav", spec).unwrap();
-    for t in (0..44100).map(|x| x as f32 / 44100.0) {
+    for t in (0..num_samples).map(|x| x as f32 / 44100.0) {
         let sample = (t * freq * 2.0 * PI).sin();
         let amplitude = i16::MAX as f32;
         writer.write_sample((sample * amplitude) as i16).unwrap();
