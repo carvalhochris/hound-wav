@@ -1,1 +1,1 @@
-```cargo run <DESIRED FREQUENCY>```
+```cargo run <DESIRED FREQUENCY> <DESIRED LENGTH IN SECONDS>```
