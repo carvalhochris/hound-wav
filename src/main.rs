@@ -31,7 +31,7 @@ fn main() {
                 freq = 1000.0;
             }
             // get cl args
-            let args: Vec<String> = env::args().collect();
+            // let args: Vec<String> = env::args().collect();
             // get arg 1
             // let query: &String = &args[1];
             // get arg 2
