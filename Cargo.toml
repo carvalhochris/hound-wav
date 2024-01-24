@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 hound = "3.5.1"
+inquire = "0.6.2"
