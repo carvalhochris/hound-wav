@@ -8,7 +8,7 @@ fn main() {
     let options: Vec<&str> = vec!["Low", "Mid", "High"];
 
     let ans: Result<&str, InquireError> =
-        Select::new("What's your favorite fruit?", options).prompt();
+        Select::new("Choose your frequency", options).prompt();
     // let answer = ans.unwrap();
     // println!("{}", answer);
 
