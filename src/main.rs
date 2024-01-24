@@ -30,6 +30,7 @@ fn main() {
     for t in (0..num_samples).map(|x| x as f32 / 44100.0) {
         let sample = (t * freq * 2.0 * PI).sin();
         let amplitude = i16::MAX as f32;
-        writer.write_sample((sample * amplitude) as i16).unwrap();
+        let loudness = amplitude * 0.5;
+        writer.write_sample((sample * loudness) as i16).unwrap();
     }
 }
