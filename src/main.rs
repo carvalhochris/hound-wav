@@ -15,7 +15,7 @@ fn main() {
 
     let ans2_num: f32 = ans2_uw.parse().unwrap();
 
-    println!("{}", ans2_uw);
+    // println!("{}", ans2_uw);
 
     let mut freq: f32 = 500.0;
 
@@ -26,15 +26,15 @@ fn main() {
             let the_choice = choice;
             println!("You chose {}", the_choice);
             if the_choice == "Low" {
-                println!("making low tone");
+                // println!("making low tone");
                 freq = 100.0;
             }
             if the_choice == "Mid" {
-                println!("making mid tone");
+                // println!("making mid tone");
                 freq = 200.0;
             }
             if the_choice == "High" {
-                println!("making high tone");
+                // println!("making high tone");
                 freq = 300.0;
             }
 
