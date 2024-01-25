@@ -1,18 +1,35 @@
 use hound;
 use inquire::{InquireError, Select};
+use std::any::type_name;
 // use std::env;
 use std::f32::consts::PI;
 use std::i16;
 
 fn main() {
     let options: Vec<&str> = vec!["Low", "Mid", "High"];
+    let options2: Vec<&str> = vec!["2", "3", "4"];
 
-    let ans: Result<&str, InquireError> =
-        Select::new("Choose your frequency", options).prompt();
+    let ans: Result<&str, InquireError> = Select::new("Choose tone 1", options).prompt();
+
+    let ans2: Result<&str, InquireError> = Select::new("Choose tone 2", options2).prompt();
+
+    let ans2_uw = ans2.unwrap();
+
+    let ans2_num: f32 = ans2_uw.parse().unwrap();
+
+    // let ans2_type = type_name(ans2_uw);
+
+    // let ans2_num = ans2_uw.parse().unwrap();
+
+    println!("{}", ans2_uw);
+
+    // println!("{}", ans2);
     // let answer = ans.unwrap();
     // println!("{}", answer);
 
     let mut freq: f32 = 500.0;
+
+    let freq2: f32 = freq * ans2_num;
 
     match ans {
         Ok(choice) => {
@@ -53,10 +70,14 @@ fn main() {
             let mut writer = hound::WavWriter::create("sine.wav", spec).unwrap();
             // sample loop
             for t in (0..num_samples).map(|x| x as f32 / 44100.0) {
-                let sample = (t * freq * 2.0 * PI).sin();
+                let sample = (t * freq * 0.5 * PI).sin();
+                let sample2 = (t * freq2 * 0.5 * PI).sin();
+                // let sum_sample = sample + sample2;
                 let amplitude = i16::MAX as f32;
                 let loudness = amplitude * 0.5;
-                writer.write_sample((sample * loudness) as i16).unwrap();
+                writer
+                    .write_sample((sample * sample2 * loudness) as i16)
+                    .unwrap();
             }
             // var_name
         }
